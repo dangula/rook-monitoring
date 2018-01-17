@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rook-api
+  labels:
+    k8s-app: rook-api
+spec:
+  jobLabel: rook-api
+  selector:
+    matchLabels:
+      app: rook-api
+      rook_cluster: ROOK_NAMESPACE_HERE
+  namespaceSelector:
+    matchNames:
+    - ROOK_NAMESPACE_HERE
+  endpoints:
+  - port: rook-api
+    interval: 30s
